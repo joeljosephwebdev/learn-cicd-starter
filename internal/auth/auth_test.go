@@ -1,11 +1,9 @@
-package yourpackage_test
+package auth
 
 import (
 	"errors"
 	"net/http"
 	"testing"
-
-	"github.com/joeljosephwebdev/learn-cicd-starter/internal/auth" // replace with actual import path
 )
 
 func TestGetAPIKey(t *testing.T) {
@@ -19,7 +17,7 @@ func TestGetAPIKey(t *testing.T) {
 			name:          "no authorization header",
 			headers:       http.Header{},
 			expectedKey:   "",
-			expectedError: auth.ErrNoAuthHeaderIncluded,
+			expectedError: ErrNoAuthHeaderIncluded,
 		},
 		{
 			name: "malformed header - no ApiKey prefix",
@@ -49,7 +47,7 @@ func TestGetAPIKey(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			key, err := auth.GetAPIKey(tt.headers)
+			key, err := GetAPIKey(tt.headers)
 
 			if key != tt.expectedKey {
 				t.Errorf("expected key %q, got %q", tt.expectedKey, key)

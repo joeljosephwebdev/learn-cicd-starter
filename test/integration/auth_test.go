@@ -55,7 +55,7 @@ func TestGetAPIKey(t *testing.T) {
 				t.Errorf("expected key %q, got %q", tt.expectedKey, key)
 			}
 
-			if tt.expectedError == nil {
+			if tt.expectedError != nil {
 				if err == nil || err.Error() != tt.expectedError.Error() {
 					t.Errorf("expected error %q, got %v", tt.expectedError, err)
 				}
